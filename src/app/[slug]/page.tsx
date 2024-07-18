@@ -1,3 +1,4 @@
+import Container from '@/components/Container'
 import PortableTextCustom from '@/components/PortableTextCustom'
 import { sanityFetch } from '@/sanity/lib/client'
 import { urlForImage } from '@/sanity/lib/image'
@@ -43,22 +44,24 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
     },
   })
 
-  const imageUrl = post.mainImage ? urlFor(post.mainImage)?.width(300).height(300).url() : null
+  const imageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1000).height(1000).url() : null
 
   return (
-    <div>
-      Post Detail
-      <div>
-        {imageUrl && <Image src={imageUrl} alt="" width={300} height={300} priority />}
-        {post.title}
-        {post.shortDescription}
+    <Container>
+      {post.category && (
+        <div className="text-center">
+          <Link className="italic" href={post.category.value}>
+            {post.category.label}
+          </Link>
+        </div>
+      )}
 
-        <div>{JSON.stringify(post.category)}</div>
-        <div>{new Date(post._createdAt).toLocaleDateString()}</div>
+      <h1 className="max-w-[600px] mx-auto text-[20px] lg:text-[30px] text-center font-medium">{post.title}</h1>
+      <div className="text-center italic text-[12px] mb-32">{new Date(post._createdAt).toLocaleDateString()}</div>
+      {imageUrl && <Image src={imageUrl} alt="" width={1000} height={600} priority className="mx-auto" />}
 
-        <PortableTextCustom content={post.content} />
-      </div>
-    </div>
+      <PortableTextCustom className="mt-64" content={post.content} />
+    </Container>
   )
 }
 

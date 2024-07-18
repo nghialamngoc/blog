@@ -1,4 +1,7 @@
 import type { Metadata } from 'next'
+import { Header } from '@/components/Header/Header'
+import ThemeProvider from '@/components/ThemeProvider'
+
 import { Inter } from 'next/font/google'
 
 import { registerLanguage } from 'react-refractor'
@@ -28,7 +31,12 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={inter.className}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Header />
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   )
 }
