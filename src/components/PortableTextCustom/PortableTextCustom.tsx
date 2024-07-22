@@ -1,8 +1,8 @@
-import { urlFor } from '@/utils/sanityImageBuilder'
+import { FC } from 'react'
 import { PortableText } from 'next-sanity'
 import Link from 'next/link'
-import { FC } from 'react'
 import { Refractor } from 'react-refractor'
+import { urlFor } from '@/sanity/lib/image'
 
 export interface PortableTextCustomProps {
   className?: string
@@ -25,7 +25,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                 <div>
                   {filename && <p className="font-medium mb-4">{filename}</p>}
                   <Refractor
-                    className="rounded-[10px] max-w-[1000px] max-h-[600px] text-[14px]"
+                    className="rounded-[10px] max-w-[700px] max-h-[600px] text-[14px]"
                     language={language}
                     value={code}
                   />
@@ -36,7 +36,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
           marks: {
             internalLink: ({ value, children }) => {
               const slug: string = value?.slug?.current
-              const fullUrl = process.env.NEXT_PUBLIC_BASE_URL! + (slug.startsWith('/') ? '' : '/') + slug
+              const fullUrl = (slug.startsWith('/') ? '' : '/') + slug
 
               return (
                 <Link className="underline" href={fullUrl}>
