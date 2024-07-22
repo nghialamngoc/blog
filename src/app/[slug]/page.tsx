@@ -20,7 +20,7 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
   if (!post) {
     redirect('/')
   }
-  const imageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1000).height(1000).url() : null
+  const imageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1000).url() : null
 
   return (
     <Container className="relative">
@@ -41,10 +41,17 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
         {new Date(post._createdAt).toLocaleDateString()}
       </div>
       {imageUrl && (
-        <Image src={imageUrl} alt="" width={1000} height={600} priority className="mx-auto" />
+        <Image
+          src={imageUrl}
+          alt=""
+          width={1000}
+          height={600}
+          priority
+          className="mx-auto max-w-[800px]"
+        />
       )}
 
-      <PortableTextCustom className="mt-64" content={post.content} />
+      <PortableTextCustom className="mt-64 leading-7" content={post.content} />
     </Container>
   )
 }

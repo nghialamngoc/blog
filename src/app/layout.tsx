@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { Header } from '@/components/Header/Header'
 import ThemeProvider from '@/components/ThemeProvider'
 
-import { Inter } from 'next/font/google'
+import { Roboto_Mono } from 'next/font/google'
 
 import { registerLanguage } from 'react-refractor'
 
@@ -17,7 +17,7 @@ registerLanguage(js)
 registerLanguage(jsx)
 registerLanguage(typescript)
 
-const inter = Inter({ subsets: ['latin'] })
+const font = Roboto_Mono({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -31,8 +31,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+      <body className={font.className}>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <Header />
           {children}
         </ThemeProvider>
