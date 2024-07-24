@@ -47,7 +47,7 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
           width={1000}
           height={600}
           priority
-          className="mx-auto max-w-[800px]"
+          className="mx-auto w-full max-w-[800px] shadow-2xl border border-gray rounded-[10px]"
         />
       )}
 

@@ -3,6 +3,8 @@ import { PortableText } from 'next-sanity'
 import Link from 'next/link'
 import { Refractor } from 'react-refractor'
 import { urlFor } from '@/sanity/lib/image'
+import clsx from 'clsx'
+import Copy from '../Copy'
 
 export interface PortableTextCustomProps {
   className?: string
@@ -17,10 +19,12 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
         components={{
           block: {
             blockquote: ({ children }) => {
-              return <blockquote className="border-l-4 border-gray pl-8">{children}</blockquote>
+              return (
+                <blockquote className="border-l-4 border-gray pl-8 my-24">{children}</blockquote>
+              )
             },
             h3: ({ children }) => {
-              return <h3 className="text-[28px] font-bold my-16">{children}</h3>
+              return <h3 className="text-[28px] font-bold my-24">{children}</h3>
             },
           },
           types: {
@@ -31,10 +35,19 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
 
             code: ({ value: { code, language, filename } }: any) => {
               return (
-                <div className="my-16">
-                  {filename && <p className="font-medium mb-4">{filename}</p>}
+                <div className="my-24 max-w-[700px]">
+                  {filename && (
+                    <div className="flex items-center justify-between bg-[#f5f2f0] rounded-t-[10px] text-black py-8 px-16 border-b border-gray">
+                      {filename}
+
+                      <Copy data={code} />
+                    </div>
+                  )}
                   <Refractor
-                    className="rounded-[10px] max-w-[700px] max-h-[600px] text-[14px]"
+                    className={clsx(
+                      'max-h-[600px] text-[14px]',
+                      filename ? 'rounded-b-[10px]' : 'rounded-[10px]',
+                    )}
                     language={language}
                     value={code}
                   />
@@ -48,7 +61,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
               const fullUrl = (slug.startsWith('/') ? '' : '/') + slug
 
               return (
-                <Link className="underline" href={fullUrl}>
+                <Link className="underline my-24" href={fullUrl}>
                   {children}
                 </Link>
               )
