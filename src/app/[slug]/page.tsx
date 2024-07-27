@@ -51,7 +51,7 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
         />
       )}
 
-      <PortableTextCustom className="mt-64 leading-7" content={post.content} />
+      <PortableTextCustom className="py-64 leading-7" content={post.content} />
     </Container>
   )
 }

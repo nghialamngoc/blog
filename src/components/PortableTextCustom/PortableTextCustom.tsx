@@ -5,6 +5,7 @@ import { Refractor } from 'react-refractor'
 import { urlFor } from '@/sanity/lib/image'
 import clsx from 'clsx'
 import Copy from '../Copy'
+import { Table } from './Table'
 
 export interface PortableTextCustomProps {
   className?: string
@@ -32,7 +33,47 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
               const imageUrl = urlFor(value)?.width(500).height(500).url()
               return imageUrl ? <img src={imageUrl} /> : ''
             },
-
+            table: ({ value }) => {
+              const header = value?.rows?.[0]
+              return (
+                <div className="my-24">
+                  <table className="w-full max-w-[700px]">
+                    <thead className="border border-gray">
+                      <tr>
+                        {header?.cells.map((x: string, i: number) => {
+                          return (
+                            <th
+                              className="border-l border-gray py-6 px-16 bg-[#f5f2f0] text-left"
+                              key={i}
+                            >
+                              {x}
+                            </th>
+                          )
+                        })}
+                      </tr>
+                    </thead>
+                    <tbody className="border border-gray">
+                      {value?.rows?.slice(1)?.map((x: any, i: number) => {
+                        return (
+                          <tr key={i}>
+                            {x?.cells.map((y: string, z: number) => {
+                              return (
+                                <td
+                                  className="border-l border-gray py-6 px-16 text-left"
+                                  key={i + '_' + z}
+                                >
+                                  {y}
+                                </td>
+                              )
+                            })}
+                          </tr>
+                        )
+                      })}
+                    </tbody>
+                  </table>
+                </div>
+              )
+            },
             code: ({ value: { code, language, filename } }: any) => {
               return (
                 <div className="my-24 max-w-[700px]">

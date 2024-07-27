@@ -105,6 +105,9 @@ export const PostSantitySchema = defineType({
           type: 'image',
         },
         {
+          type: 'table',
+        },
+        {
           type: 'code',
           options: {
             languageAlternatives: [
