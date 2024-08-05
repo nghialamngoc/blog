@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { PortableText } from 'next-sanity'
-import Link from 'next/link'
+import Link from '@/components/Link'
 import { Refractor } from 'react-refractor'
 import { urlFor } from '@/sanity/lib/image'
 import clsx from 'clsx'

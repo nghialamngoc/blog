@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import Image from 'next/image'
-import Link from 'next/link'
+import Link from '@/components/Link'
 import Container from '@/components/Container'
 import { urlFor } from '@/sanity/lib/image'
 import { RouterPagination } from '@/components/Pagination/RouterPagination'
@@ -26,15 +26,13 @@ const Home: FC<HomeProps> = async ({ searchParams: { page, perPage = 6, category
       <div className="grid md:grid-cols-2 gap-16">
         {!!posts.length
           ? posts.map((post, index) => {
-              const imageUrl = post.mainImage
-                ? urlFor(post.mainImage)?.width(800).height(800).url()
-                : null
+              const imageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1000).url() : null
 
               return (
                 <div key={index} className="rounded-[16px] border">
                   {imageUrl && (
                     <Image
-                      className="w-full h-[300px] rounded-t-[16px] object-cover"
+                      className="w-full h-[300px] rounded-t-[16px] object-contain"
                       src={imageUrl}
                       alt=""
                       width={800}

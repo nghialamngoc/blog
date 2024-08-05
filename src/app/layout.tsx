@@ -10,8 +10,10 @@ import js from 'refractor/lang/javascript.js'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
 
-import './globals.css'
+import '@/styles/globals.css'
 import '@/styles/prism.css'
+import '@/styles/nprogress.css'
+import { RouterListener } from '@/components/RouterListener'
 
 registerLanguage(js)
 registerLanguage(jsx)
@@ -39,6 +41,7 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <Header />
+          <RouterListener />
           {children}
         </ThemeProvider>
       </body>
