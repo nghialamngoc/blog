@@ -59,7 +59,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                             {x?.cells.map((y: string, z: number) => {
                               return (
                                 <td
-                                  className="border-l border-gray py-6 px-16 text-left"
+                                  className="border-l border-b border-gray py-6 px-16 text-left"
                                   key={i + '_' + z}
                                 >
                                   {y}
