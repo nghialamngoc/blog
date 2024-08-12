@@ -14,6 +14,19 @@ const nextConfig = {
       fullUrl: true,
     },
   },
+
+  generateBuildId: () => {
+    return new Date().getTime().toString()
+  },
+
+  webpack: (config, { webpack, buildId }) => {
+    config.plugins.push(
+      new webpack.DefinePlugin({
+        'process.env.NEXT_PUBLIC_BUILD_ID': JSON.stringify(buildId),
+      }),
+    )
+    return config
+  },
 }
 
 export default nextConfig
