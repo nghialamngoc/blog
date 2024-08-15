@@ -1,0 +1,17 @@
+.root ul {
+  list-style: disc;
+  margin-left: 20px;
+}
+
+.root ol {
+  list-style: decimal;
+  margin-left: 29px;
+}
+
+.link svg {
+  display: none;
+}
+
+.link:hover svg {
+  display: inline-block;
+}

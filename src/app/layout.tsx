@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Header } from '@/components/Header/Header'
 import ThemeProvider from '@/components/ThemeProvider'
+import { RouterListener } from '@/components/RouterListener'
 
 import { Roboto_Mono } from 'next/font/google'
 
@@ -13,7 +14,6 @@ import typescript from 'refractor/lang/typescript'
 import '@/styles/globals.css'
 import '@/styles/prism.css'
 import '@/styles/nprogress.css'
-import { RouterListener } from '@/components/RouterListener'
 
 registerLanguage(js)
 registerLanguage(jsx)
@@ -34,12 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={font.className}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Header />
           <RouterListener />
           {children}

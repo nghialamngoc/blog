@@ -9,6 +9,7 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { codeInput } from '@sanity/code-input'
 import { table } from '@sanity/table'
+import { markdownSchema } from 'sanity-plugin-markdown'
 
 // Go to https://www.sanity.io/docs/api-versioning to learn how API versioning works
 import { apiVersion, dataset, projectId } from './src/sanity/env'
@@ -27,5 +28,6 @@ export default defineConfig({
     visionTool({ defaultApiVersion: apiVersion }),
     codeInput(),
     table(),
+    markdownSchema(),
   ],
 })

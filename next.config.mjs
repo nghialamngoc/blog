@@ -9,11 +9,6 @@ const nextConfig = {
       },
     ],
   },
-  logging: {
-    fetches: {
-      fullUrl: true,
-    },
-  },
 
   generateBuildId: () => {
     return new Date().getTime().toString()

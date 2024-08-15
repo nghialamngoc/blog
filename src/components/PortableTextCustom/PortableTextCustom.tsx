@@ -1,37 +1,61 @@
 import { FC } from 'react'
-import { PortableText } from 'next-sanity'
+import { PortableText, PortableTextBlock, toPlainText } from 'next-sanity'
 import Link from '@/components/Link'
 import { Refractor } from 'react-refractor'
 import { urlFor } from '@/sanity/lib/image'
 import clsx from 'clsx'
 import Copy from '../Copy'
-import { Table } from './Table'
+import styles from './PortableTextCustom.module.css'
+import { trimAllSpace } from '@/utils/string'
+import { LinkIcon } from 'lucide-react'
 
 export interface PortableTextCustomProps {
   className?: string
-  content: any
+  content: PortableTextBlock
 }
 
 export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, content }) => {
   return (
-    <div className={className}>
+    <div className={clsx(styles.root, className)}>
       <PortableText
         value={content}
+        listNestingMode="html"
         components={{
           block: {
             blockquote: ({ children }) => {
-              return (
-                <blockquote className="border-l-4 border-gray pl-8 my-24">{children}</blockquote>
-              )
+              return <blockquote className="border-l-4 border-gray pl-8 my-24">{children}</blockquote>
             },
             h3: ({ children }) => {
+              return <h3 className="text-24 lg:text-[28px] font-bold my-24">{children}</h3>
+            },
+            h5: ({ value, children }) => {
+              const text = value.children[0].text
+              const id = text && typeof text === 'string' ? trimAllSpace(text) : ''
+
+              return (
+                <h3 id={id} className="text-20 lg:text-[24px] font-bold mt-16 mb-8 ">
+                  {id ? (
+                    <Link
+                      className={clsx(styles.link, 'w-fit flex items-center gap-8 hover:text-hover')}
+                      href={`#${id}`}
+                    >
+                      {children}
+                      <LinkIcon width={20} />
+                    </Link>
+                  ) : (
+                    children
+                  )}
+                </h3>
+              )
+            },
+            h6: ({ children }) => {
               return <h3 className="text-[28px] font-bold my-24">{children}</h3>
             },
           },
           types: {
             image: ({ value }) => {
-              const imageUrl = urlFor(value)?.width(500).height(500).url()
-              return imageUrl ? <img src={imageUrl} /> : ''
+              const imageUrl = urlFor(value)?.width(500).url()
+              return imageUrl ? <img className="mx-auto my-16" src={imageUrl} /> : ''
             },
             table: ({ value }) => {
               const header = value?.rows?.[0]
@@ -42,10 +66,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                       <tr>
                         {header?.cells.map((x: string, i: number) => {
                           return (
-                            <th
-                              className="border-l border-gray py-6 px-16 bg-[#f5f2f0] text-left"
-                              key={i}
-                            >
+                            <th className="border-l border-gray py-6 px-16 bg-[#f5f2f0] text-left" key={i}>
                               {x}
                             </th>
                           )
@@ -58,10 +79,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                           <tr key={i}>
                             {x?.cells.map((y: string, z: number) => {
                               return (
-                                <td
-                                  className="border-l border-b border-gray py-6 px-16 text-left"
-                                  key={i + '_' + z}
-                                >
+                                <td className="border-l border-b border-gray py-6 px-16 text-left" key={i + '_' + z}>
                                   {y}
                                 </td>
                               )
@@ -85,10 +103,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                     </div>
                   )}
                   <Refractor
-                    className={clsx(
-                      'max-h-[600px] text-[14px]',
-                      filename ? 'rounded-b-[10px]' : 'rounded-[10px]',
-                    )}
+                    className={clsx('max-h-[600px] text-[14px]', filename ? 'rounded-b-[10px]' : 'rounded-[10px]')}
                     language={language}
                     value={code}
                   />
@@ -106,6 +121,14 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                   {children}
                 </Link>
               )
+            },
+          },
+          list: {
+            bullet: ({ children }) => {
+              return <ul className="mb-16">{children}</ul>
+            },
+            numbered: ({ children }) => {
+              return <ol className="mb-16">{children}</ol>
             },
           },
         }}
