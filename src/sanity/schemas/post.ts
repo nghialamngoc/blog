@@ -57,10 +57,10 @@ export const PostSantitySchema = defineType({
         },
       ],
     }),
-    // defineField({
-    //   name: 'createdAt',
-    //   type: 'datetime',
-    // }),
+    defineField({
+      name: 'summary',
+      type: 'text',
+    }),
     defineField({
       name: 'content',
       type: 'array',
@@ -95,6 +95,24 @@ export const PostSantitySchema = defineType({
                         type: 'post',
                       },
                     ],
+                  },
+                ],
+              },
+              {
+                name: 'link',
+                type: 'object',
+                title: 'External link',
+                fields: [
+                  {
+                    name: 'href',
+                    type: 'url',
+                    title: 'URL',
+                  },
+                  {
+                    title: 'Open in new tab',
+                    name: 'blank',
+                    description: 'Read https://css-tricks.com/use-target_blank/',
+                    type: 'boolean',
                   },
                 ],
               },

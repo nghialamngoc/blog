@@ -38,6 +38,8 @@ export default function RootLayout({
           <Header />
           <RouterListener />
           {children}
+
+          <div className="h-[100vh]"></div>
         </ThemeProvider>
       </body>
     </html>

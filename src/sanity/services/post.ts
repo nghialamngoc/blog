@@ -40,6 +40,7 @@ export const postService = {
             'value': value.current
           },
           mainImage,
+          summary,
           content[]{
             ...,
             markDefs[]{

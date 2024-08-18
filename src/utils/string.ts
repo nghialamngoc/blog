@@ -8,3 +8,11 @@ export const containsHtmlTag = (html: string, tagName: string) => {
   const pattern = new RegExp('<(' + tagName + ')(?:\\s+[^>]*)?\\s*\\/?>', 'i')
   return pattern.test(html)
 }
+
+export const idTransform = (str?: string) =>
+  str
+    ?.replace(/(\(|\))/g, '')
+    .split(' ')
+    .filter((x) => x)
+    .join('-')
+    .toLocaleLowerCase() ?? ''

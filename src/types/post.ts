@@ -10,6 +10,7 @@ export interface Post {
   }
   slug: string
   mainImage: Image
+  summary: string
   content: any
   _createdAt: string
 }

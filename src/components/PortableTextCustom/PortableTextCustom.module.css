@@ -3,9 +3,25 @@
   margin-left: 20px;
 }
 
+.root li {
+  width: fit-content;
+}
+
+.root a {
+  color: var(--link);
+}
+
 .root ol {
   list-style: decimal;
   margin-left: 29px;
+}
+
+.link {
+  color: var(--back) !important;
+}
+
+.link:hover {
+  color: var(--link) !important;
 }
 
 .link svg {

@@ -6,7 +6,7 @@ import { urlFor } from '@/sanity/lib/image'
 import clsx from 'clsx'
 import Copy from '../Copy'
 import styles from './PortableTextCustom.module.css'
-import { trimAllSpace } from '@/utils/string'
+import { idTransform } from '@/utils/string'
 import { LinkIcon } from 'lucide-react'
 
 export interface PortableTextCustomProps {
@@ -25,20 +25,17 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
             blockquote: ({ children }) => {
               return <blockquote className="border-l-4 border-gray pl-8 my-24">{children}</blockquote>
             },
-            h3: ({ children }) => {
+            h1: ({ children }) => {
               return <h3 className="text-24 lg:text-[28px] font-bold my-24">{children}</h3>
             },
-            h5: ({ value, children }) => {
+            h2: ({ value, children }) => {
               const text = value.children[0].text
-              const id = text && typeof text === 'string' ? trimAllSpace(text) : ''
+              const id = text && typeof text === 'string' ? idTransform(text) : ''
 
               return (
-                <h3 id={id} className="text-20 lg:text-[24px] font-bold mt-16 mb-8 ">
+                <h3 id={id} className="text-20 lg:text-[24px] font-bold mt-16 mb-8">
                   {id ? (
-                    <Link
-                      className={clsx(styles.link, 'w-fit flex items-center gap-8 hover:text-hover')}
-                      href={`#${id}`}
-                    >
+                    <Link className={clsx(styles.link, 'w-fit flex items-center gap-8')} href={`#${id}`}>
                       {children}
                       <LinkIcon width={20} />
                     </Link>
@@ -48,8 +45,22 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                 </h3>
               )
             },
-            h6: ({ children }) => {
-              return <h3 className="text-[28px] font-bold my-24">{children}</h3>
+            h3: ({ value, children }) => {
+              const text = value.children[0].text
+              const id = text && typeof text === 'string' ? idTransform(text) : ''
+
+              return (
+                <h3 id={id} className="text-[20px] font-bold mt-16 mb-8">
+                  {id ? (
+                    <Link className={clsx(styles.link, 'w-fit flex items-center gap-8')} href={`#${id}`}>
+                      {children}
+                      <LinkIcon width={20} />
+                    </Link>
+                  ) : (
+                    children
+                  )}
+                </h3>
+              )
             },
           },
           types: {
