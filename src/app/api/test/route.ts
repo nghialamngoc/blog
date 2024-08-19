@@ -2,8 +2,12 @@ import { categoryService } from '@/sanity/services'
 
 export const revalidate = 60
 
+function delay(ms: number) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
 export async function GET(request: Request) {
-  // const res = await categoryService.getHomeCategories()
+  await delay(3000)
 
   return Response.json({
     test: 40,

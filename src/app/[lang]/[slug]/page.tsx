@@ -20,7 +20,7 @@ export interface PostDetailProps {
 const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
   const post = await postService.getPost(slug)
 
-  const summaryData = post.summary.split('\n') ?? []
+  const summaryData = post.summary?.split('\n') ?? []
 
   if (!post) {
     redirect('/')
@@ -31,7 +31,7 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
     <Container className="relative flex">
       <GoBack className="absolute" />
 
-      <div>
+      <div className="grow">
         {post.category && (
           <div className="text-center">
             <Link className="italic" href={post.category.value}>
@@ -56,7 +56,7 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
         <PortableTextCustom className="py-64 leading-7" content={post.content} />
       </div>
 
-      {!!summaryData.length && <SubmmaryTab data={summaryData} />}
+      {!!summaryData.length && <SubmmaryTab className="hidden xl:flex shrink-0" data={summaryData} />}
     </Container>
   )
 }

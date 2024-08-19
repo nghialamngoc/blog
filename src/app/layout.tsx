@@ -39,7 +39,7 @@ export default function RootLayout({
           <RouterListener />
           {children}
 
-          <div className="h-[100vh]"></div>
+          <div className="hidden xl:block h-[100vh]"></div>
         </ThemeProvider>
       </body>
     </html>

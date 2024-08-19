@@ -6,10 +6,11 @@ import Link from 'next/link'
 import { FC, useEffect, useState } from 'react'
 
 export interface SubmmaryTab {
+  className?: string
   data: string[]
 }
 
-export const SubmmaryTab: FC<SubmmaryTab> = ({ data }) => {
+export const SubmmaryTab: FC<SubmmaryTab> = ({ data, className }) => {
   const [activeIds, setActiveIds] = useState<string[]>([])
 
   useEffect(() => {
@@ -42,7 +43,9 @@ export const SubmmaryTab: FC<SubmmaryTab> = ({ data }) => {
   }, [])
 
   return (
-    <div className="hidden lg:flex text-[14px] flex-col gap-8 w-[320px] p-16 sticky top-[80px] h-fit shrink-0">
+    <div
+      className={clsx('flex text-[14px] flex-col gap-8 w-[320px] p-16 sticky top-[80px] h-fit border-l-2', className)}
+    >
       {data.map((x, index) => {
         const title = x.startsWith('-') || x.startsWith('+') ? x.slice(2) : x
         const id = idTransform(title)
