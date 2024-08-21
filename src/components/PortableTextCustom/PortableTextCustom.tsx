@@ -103,13 +103,12 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                 </div>
               )
             },
-            code: ({ value: { code, language, filename } }: any) => {
+            code: ({ value: { code, language = 'javascript', filename } }: any) => {
               return (
                 <div className="my-24 max-w-[700px]">
                   {filename && (
                     <div className="flex items-center justify-between bg-[#f5f2f0] rounded-t-[10px] text-black py-8 px-16 border-b border-gray">
                       {filename}
-
                       <Copy data={code} />
                     </div>
                   )}

@@ -35,7 +35,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={font.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Header />
           <RouterListener />
           {children}
 

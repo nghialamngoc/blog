@@ -11,7 +11,7 @@ export const containsHtmlTag = (html: string, tagName: string) => {
 
 export const idTransform = (str?: string) =>
   str
-    ?.replace(/(\(|\))/g, '')
+    ?.replace(/(\(|\)|:)/g, '')
     .split(' ')
     .filter((x) => x)
     .join('-')
