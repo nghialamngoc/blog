@@ -7,8 +7,6 @@ import { urlFor } from '@/sanity/lib/image'
 import { postService } from '@/sanity/services'
 import { redirect } from 'next/navigation'
 import GoBack from '@/components/GoBack'
-import { idTransform } from '@/utils/string'
-import clsx from 'clsx'
 import SubmmaryTab from '@/components/SummaryTab'
 
 export interface PostDetailProps {

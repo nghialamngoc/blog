@@ -1,5 +1,6 @@
 import { Post } from '@/types/post'
 import { sanityFetch } from '../lib/client'
+import { info } from '@/utils/safety-log'
 
 export const postService = {
   getPostList: async (page: number = 1, perPage: number = 6, category?: string) => {
@@ -29,7 +30,7 @@ export const postService = {
     return { data, total }
   },
   getPost: async (slug: string) => {
-    return await sanityFetch<Post>({
+    const result = await sanityFetch<Post>({
       query: `*[_type == 'post' && slug.current == $slug][0]
         {
           title,
@@ -56,5 +57,9 @@ export const postService = {
         slug,
       },
     })
+
+    info(`getPost ${slug}:`, result)
+
+    return result
   },
 }
