@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import { Header } from '@/components/Header/Header'
 import ThemeProvider from '@/components/ThemeProvider'
 import { RouterListener } from '@/components/RouterListener'
 
@@ -10,6 +9,7 @@ import { registerLanguage } from 'react-refractor'
 import js from 'refractor/lang/javascript.js'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
+import Header from '@/components/Header'
 
 import '@/styles/globals.css'
 import '@/styles/prism.css'
@@ -36,6 +36,8 @@ export default function RootLayout({
       <body className={font.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <RouterListener />
+
+          <Header />
           {children}
 
           <div className="hidden xl:block h-[100vh]"></div>

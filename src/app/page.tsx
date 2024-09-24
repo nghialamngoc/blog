@@ -4,8 +4,8 @@ import Link from '@/components/Link'
 import Container from '@/components/Container'
 import { urlFor } from '@/sanity/lib/image'
 import { RouterPagination } from '@/components/Pagination/RouterPagination'
-import { categoryService, postService } from '@/sanity/services'
-import { HomeCategories } from '@/components/HomeCategories/HomeCategories'
+import { postService } from '@/sanity/services'
+// import { HomeCategories } from '@/components/HomeCategories'
 
 interface HomeProps {
   searchParams: {
@@ -17,11 +17,11 @@ interface HomeProps {
 
 const Home: FC<HomeProps> = async ({ searchParams: { page, perPage = 6, category } }) => {
   const { data: posts, total } = await postService.getPostList(page, perPage, category)
-  const categories = await categoryService.getHomeCategories()
+  // const categories = await categoryService.getHomeCategories()
 
   return (
     <Container>
-      <HomeCategories className="mb-32" categories={categories} />
+      {/* <HomeCategories className="mb-32" categories={categories} /> */}
 
       <div className="grid md:grid-cols-2 gap-16">
         {!!posts.length

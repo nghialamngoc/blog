@@ -17,7 +17,7 @@
 }
 
 .link {
-  color: var(--back) !important;
+  color: var(--text) !important;
 }
 
 .link:hover {

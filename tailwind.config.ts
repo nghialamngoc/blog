@@ -54,7 +54,8 @@ const config = {
     },
     extend: {
       colors: {
-        back: 'var(--back)',
+        textLight: 'var(--text-light)',
+        text: 'var(--text)',
         link: 'var(--link)',
         gray: '#d6d6d7',
         border: 'hsl(var(--border))',

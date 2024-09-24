@@ -132,6 +132,13 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                 </Link>
               )
             },
+            link: ({ value, children }) => {
+              return (
+                <Link className="underline my-24" href={value.href} target={value.blank ? '_blank' : '_self'}>
+                  {children}
+                </Link>
+              )
+            },
           },
           list: {
             bullet: ({ children }) => {

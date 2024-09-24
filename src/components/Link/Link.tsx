@@ -6,8 +6,9 @@ import clsx from 'clsx'
 import { ComponentProps, forwardRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { isModifiedEvent } from '@/utils/url'
-
 import { addBasePath } from 'next/dist/client/add-base-path'
+
+import styles from './Link.module.css'
 
 function shouldTriggerStartEvent(href: string, clickEvent?: React.MouseEvent) {
   const current = window.location
@@ -36,7 +37,7 @@ export type LinkProps = ComponentProps<typeof NextLink> & {
 }
 
 export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
-  { href, prefetch = false, className, activeClassName, exact, onClick, ...props },
+  { href, prefetch = false, className, exact, onClick, ...props },
   forwardedRef,
 ) {
   const path = usePathname()
@@ -48,7 +49,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
       ref={forwardedRef}
       href={href}
       prefetch={prefetch}
-      className={clsx(className, isActive ? activeClassName : null)}
+      className={clsx(styles.root, isActive ? styles.active : null, className)}
       onClick={(e) => {
         if (shouldTriggerStartEvent(href.toString(), e)) NProgress.start()
         if (onClick) onClick(e)

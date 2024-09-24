@@ -1,0 +1,12 @@
+.root {
+  color: var(--text-light);
+}
+
+.root:hover {
+  color: var(--text);
+}
+
+.active {
+  color: var(--text);
+  font-weight: 500;
+}

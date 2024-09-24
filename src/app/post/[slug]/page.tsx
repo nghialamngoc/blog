@@ -18,7 +18,7 @@ export interface PostDetailProps {
 const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
   const post = await postService.getPost(slug)
 
-  const summaryData = post.summary?.split('\n') ?? []
+  const summaryData = post?.summary?.split('\n') ?? []
 
   if (!post) {
     redirect('/')

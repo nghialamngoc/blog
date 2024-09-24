@@ -4,7 +4,8 @@
 
 @layer base {
   :root {
-    --back: #020817;
+    --text: #202124;
+    --text-light: #5f6368;
     --link: #68b5fb;
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
@@ -35,6 +36,8 @@
   }
 
   .dark {
+    --text-light: #5f6368;
+    --text: #202124;
     --link: #68b5fb;
     --background: 222, 47%, 11%;
     --foreground: 0 0 89% / 1;

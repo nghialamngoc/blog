@@ -17,5 +17,15 @@ export const CategorySantitySchema = defineType({
       },
       validation: (rule) => rule.required().error('value is required!'),
     }),
+    defineField({
+      name: 'parent',
+      type: 'string',
+    }),
+    defineField({
+      name: 'order',
+      type: 'number',
+      initialValue: 0,
+      validation: (rule) => rule.required().error('order is required!').min(0).error('mininum is 0'),
+    }),
   ],
 })
