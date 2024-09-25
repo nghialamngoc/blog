@@ -22,7 +22,7 @@ export const HomeCategories: FC<HomeCategoriesProps> = ({ categories, className 
         <div className="flex gap-16">
           {categories.map((category, index) => {
             const search = new URLSearchParams(searchParams.toString())
-            search.set('category', category.value)
+            search.set('category', category.href)
 
             return (
               <Link
@@ -32,8 +32,7 @@ export const HomeCategories: FC<HomeCategoriesProps> = ({ categories, className 
                   'flex items-center justify-center min-w-[38px] h-[38px] rounded-[8px] border p-16',
                   'hover:bg-accent dark:hover:text-white ',
                   {
-                    'bg-accent dark:text-white font-medium pointer-events-none':
-                      categoryParam === category.value,
+                    'bg-accent dark:text-white font-medium pointer-events-none': categoryParam === category.href,
                   },
                 )}
               >

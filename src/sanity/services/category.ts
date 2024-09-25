@@ -8,6 +8,8 @@ export const categoryService = {
         _id,
         label,
         'value': value.current,
+        'href': href.current,
+        order,
         parent
       }`,
     })
@@ -19,6 +21,7 @@ export const categoryService = {
         _id,
         label,
         'value': value.current,
+        'href': href.current,
         order,
         parent
       } | order(order asc)`,
@@ -33,6 +36,7 @@ export const categoryService = {
               _id: Date.now().toString(),
               label: current.parent,
               value: current.parent.toLowerCase(),
+              href: '/' + current.parent.toLowerCase(),
               children: [current],
               order: current.order,
             })
@@ -42,5 +46,17 @@ export const categoryService = {
 
       return prev
     }, [] as TopNavigationCategory[])
+  },
+
+  getCategoriesByParent: async (href: string) => {
+    return await sanityFetch<Category[]>({
+      query: `*[_type=="category" && lower(parent) == '${href}'] {
+        _id,
+        label,
+        'href': href.current,
+        'value': value.current,
+        parent
+      }`,
+    })
   },
 }

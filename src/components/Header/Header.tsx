@@ -8,7 +8,7 @@ export const Header = async () => {
 
   return (
     <div className="shadow-sm">
-      <div className="flex justify-between items-center bg-white p-16 gap-32">
+      <div className="flex justify-between items-center bg-white py-16 px-32 gap-32">
         <Link className="text-[18px] lg:text-[30px] font-bold cursor-pointer" href={'/'}>
           <span className="text-text">Nghia.Lam</span>
           <span className="text-[#15acfb]">Blog</span>
@@ -18,7 +18,7 @@ export const Header = async () => {
             <div className="flex gap-32">
               {categories.map((category, index) => {
                 return (
-                  <Link href={`/${category.value}`} key={index}>
+                  <Link href={category.href} key={index}>
                     {category.label}
                   </Link>
                 )

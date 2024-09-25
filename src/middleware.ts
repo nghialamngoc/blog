@@ -4,8 +4,6 @@ import { NextRequest, NextResponse } from 'next/server'
 export function middleware(request: NextRequest) {
   const pathname = request.nextUrl.pathname
 
-  console.log('pathname', pathname)
-
   if (pathname === '/') {
     return NextResponse.redirect(new URL('/post', request.url))
   }

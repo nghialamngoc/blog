@@ -18,14 +18,23 @@ export const CategorySantitySchema = defineType({
       validation: (rule) => rule.required().error('value is required!'),
     }),
     defineField({
-      name: 'parent',
-      type: 'string',
+      name: 'href',
+      type: 'slug',
+      options: {
+        source: 'label',
+        slugify: (source) => `/${source.toLocaleLowerCase()}`,
+      },
+      validation: (rule) => rule.required().error('href is required!'),
     }),
     defineField({
       name: 'order',
       type: 'number',
       initialValue: 0,
       validation: (rule) => rule.required().error('order is required!').min(0).error('mininum is 0'),
+    }),
+    defineField({
+      name: 'parent',
+      type: 'string',
     }),
   ],
 })

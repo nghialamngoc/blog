@@ -16,6 +16,8 @@ export interface PostDetailProps {
 }
 
 const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
+  console.log('slug', slug)
+
   const post = await postService.getPost(slug)
 
   const summaryData = post?.summary?.split('\n') ?? []
