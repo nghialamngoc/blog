@@ -16,14 +16,16 @@ interface PostProps {
 }
 
 const Post: FC<PostProps> = async ({ searchParams: { page, perPage = 6, category } }) => {
-  const { data: posts, total } = await postService.getPostList(page, perPage, category)
   const categories = await categoryService.getCategoriesByParent('Post')
+  const ids = categories.map((x) => x._id)
+
+  const { data: posts, total } = await postService.getPostList(ids, page, perPage, category)
 
   return (
     <>
       {categories && <SubNav categories={categories} />}
       <Container>
-        <div className="grid md:grid-cols-2 gap-16">
+        <div className="grid md:grid-cols-3 gap-16">
           {!!posts.length
             ? posts.map((post, index) => {
                 const imageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1000).url() : null
@@ -46,7 +48,7 @@ const Post: FC<PostProps> = async ({ searchParams: { page, perPage = 6, category
                       </div>
 
                       <Link href={post.slug}>
-                        <h2 className="text-[20px] dark:text-white font-medium text-text">{post.title}</h2>
+                        <h2 className="text-[20px] dark:text-white font-medium text-black">{post.title}</h2>
                       </Link>
 
                       <h3 className="text-[14px]">{post.shortDescription}</h3>

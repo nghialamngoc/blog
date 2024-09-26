@@ -1,11 +1,3 @@
-.root {
-  color: var(--gray);
-}
-
-.root:hover {
-  color: var(--black);
-}
-
 .active {
   color: var(--black);
   font-weight: 500;

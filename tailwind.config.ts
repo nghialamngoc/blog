@@ -56,7 +56,7 @@ const config = {
       colors: {
         grayLight: 'var(--gray-light)',
         gray: 'var(--gray)',
-        text: 'var(--black)',
+        black: 'var(--black)',
         link: 'var(--link)',
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',

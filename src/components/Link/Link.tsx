@@ -2,11 +2,11 @@
 
 import NProgress from 'nprogress'
 import NextLink from 'next/link'
-import clsx from 'clsx'
 import { ComponentProps, forwardRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { isModifiedEvent } from '@/utils/url'
 import { addBasePath } from 'next/dist/client/add-base-path'
+import { twMerge } from 'tailwind-merge'
 
 import styles from './Link.module.css'
 
@@ -49,7 +49,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
       ref={forwardedRef}
       href={href}
       prefetch={prefetch}
-      className={clsx(styles.root, isActive ? styles.active : null, className)}
+      className={twMerge('text-gray hover:text-black', isActive ? styles.active : null, className)}
       onClick={(e) => {
         if (shouldTriggerStartEvent(href.toString(), e)) NProgress.start()
         if (onClick) onClick(e)

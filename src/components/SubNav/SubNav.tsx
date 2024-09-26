@@ -4,6 +4,9 @@ import { Category } from '@/types/category'
 import { FC, useCallback, useEffect, useRef } from 'react'
 import Link from '../Link'
 
+import styles from './SubNav.module.css'
+import { isClient } from '@/utils/common'
+
 export interface SubNavProps {
   categories: Category[]
 }
@@ -13,7 +16,7 @@ export const SubNav: FC<SubNavProps> = ({ categories }) => {
 
   const isScrollingUp = useCallback(
     (() => {
-      let lastScrollTop = window.scrollY || document.documentElement.scrollTop
+      let lastScrollTop = isClient ? window.scrollY || document.documentElement.scrollTop : 0
 
       return function isScrollingUp() {
         let scrollTop = window.scrollY || document.documentElement.scrollTop
@@ -30,15 +33,11 @@ export const SubNav: FC<SubNavProps> = ({ categories }) => {
       const scrollTop = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0
       const isUp = isScrollingUp()
 
-      // 77 (height of Header) / 56 (height of subNav)
-      if (scrollTop > 77 + 56 && isUp) {
-        console.log('hể')
-
-        el.current?.classList.add('sticky')
-        el.current?.classList.add('top-0')
+      // 77 (height of Header)
+      if (scrollTop > 77 && isUp) {
+        el.current?.classList.add(styles.root)
       } else {
-        el.current?.classList.remove('sticky')
-        el.current?.classList.remove('top-0')
+        el.current?.classList.remove(styles.root)
       }
     }
     window.addEventListener('scroll', onScroll)
@@ -49,10 +48,10 @@ export const SubNav: FC<SubNavProps> = ({ categories }) => {
   })
 
   return (
-    <div className="flex px-32 py-16 gap-32 bg-grayLight" ref={el}>
+    <div className={'flex px-32 py-16 gap-32 bg-grayLight'} ref={el}>
       {categories.map((x, index) => {
         return (
-          <Link key={index} href={x.href} className="text-black">
+          <Link key={index} href={x.href} className="text-black text-[14px]">
             {x.label}
           </Link>
         )
