@@ -43,15 +43,15 @@ const Post: FC<PostProps> = async ({ searchParams: { page, perPage = 6, category
                     )}
 
                     <div className="flex flex-col p-16 gap-4">
-                      <div className="italic text-[14px]">
+                      <div className="italic text-14">
                         {new Date(post._createdAt).toLocaleDateString()} - {post?.category?.label}
                       </div>
 
                       <Link href={post.slug}>
-                        <h2 className="text-[20px] dark:text-white font-medium text-black">{post.title}</h2>
+                        <h2 className="text-20 dark:text-white font-medium text-black">{post.title}</h2>
                       </Link>
 
-                      <h3 className="text-[14px]">{post.shortDescription}</h3>
+                      <h3 className="text-14">{post.shortDescription}</h3>
                     </div>
                   </div>
                 )

@@ -26,14 +26,14 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
               return <blockquote className="border-l-4 border-gray pl-8 my-24">{children}</blockquote>
             },
             h1: ({ children }) => {
-              return <h3 className="text-24 lg:text-[28px] font-bold my-24">{children}</h3>
+              return <h3 className="text-24 lg:text-28 font-bold my-24">{children}</h3>
             },
             h2: ({ value, children }) => {
               const text = value.children[0].text
               const id = text && typeof text === 'string' ? idTransform(text) : ''
 
               return (
-                <h3 id={id} className="text-20 lg:text-[24px] font-bold mt-16 mb-8">
+                <h2 id={id} className="text-20 lg:text-24 font-semibold mt-16 mb-8">
                   {id ? (
                     <Link className={clsx(styles.link, 'w-fit flex items-center gap-8')} href={`#${id}`}>
                       {children}
@@ -42,7 +42,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                   ) : (
                     children
                   )}
-                </h3>
+                </h2>
               )
             },
             h3: ({ value, children }) => {
@@ -50,7 +50,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
               const id = text && typeof text === 'string' ? idTransform(text) : ''
 
               return (
-                <h3 id={id} className="text-[20px] font-bold mt-16 mb-8">
+                <h3 id={id} className="text-18 lg:text-24 font-semibold mt-16 mb-8">
                   {id ? (
                     <Link className={clsx(styles.link, 'w-fit flex items-center gap-8')} href={`#${id}`}>
                       {children}
@@ -105,7 +105,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
             },
             code: ({ value: { code, language = 'javascript', filename } }: any) => {
               return (
-                <div className="my-24 max-w-[700px]">
+                <div className="my-24 max-w-[800px]">
                   {filename && (
                     <div className="flex items-center justify-between bg-[#f5f2f0] rounded-t-[10px] text-black py-8 px-16 border-b border-gray">
                       {filename}
@@ -113,7 +113,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                     </div>
                   )}
                   <Refractor
-                    className={clsx('max-h-[600px] text-[14px]', filename ? 'rounded-b-[10px]' : 'rounded-[10px]')}
+                    className={clsx('max-h-[600px] text-14', filename ? 'rounded-b-[10px]' : 'rounded-[10px]')}
                     language={language}
                     value={code}
                   />

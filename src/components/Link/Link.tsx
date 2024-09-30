@@ -8,8 +8,6 @@ import { isModifiedEvent } from '@/utils/url'
 import { addBasePath } from 'next/dist/client/add-base-path'
 import { twMerge } from 'tailwind-merge'
 
-import styles from './Link.module.css'
-
 function shouldTriggerStartEvent(href: string, clickEvent?: React.MouseEvent) {
   const current = window.location
   const target = new URL(addBasePath(href), location.href)
@@ -49,7 +47,7 @@ export const Link = forwardRef<HTMLAnchorElement, LinkProps>(function Link(
       ref={forwardedRef}
       href={href}
       prefetch={prefetch}
-      className={twMerge('text-gray hover:text-black', isActive ? styles.active : null, className)}
+      className={twMerge('text-gray hover:text-black', isActive ? 'text-black font-medium' : null, className)}
       onClick={(e) => {
         if (shouldTriggerStartEvent(href.toString(), e)) NProgress.start()
         if (onClick) onClick(e)

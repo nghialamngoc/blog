@@ -16,8 +16,6 @@ export interface PostDetailProps {
 }
 
 const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
-  console.log('slug', slug)
-
   const post = await postService.getPost(slug)
 
   const summaryData = post?.summary?.split('\n') ?? []
@@ -34,14 +32,14 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
       <div className="grow">
         {post.category && (
           <div className="text-center">
-            <Link className="italic" href={post.category.value}>
+            <Link className="text-black" href={post.category.value}>
               {post.category.label}
             </Link>
           </div>
         )}
 
-        <h1 className="max-w-[600px] mx-auto text-[20px] lg:text-[30px] text-center font-medium">{post.title}</h1>
-        <div className="text-center italic text-[12px] mb-32">{new Date(post._createdAt).toLocaleDateString()}</div>
+        <h1 className="max-w-[800px] mx-auto text-20 lg:text-32 text-center font-bold">{post.title}</h1>
+        <div className="text-center italic text-12 mb-32">{new Date(post._createdAt).toLocaleDateString()}</div>
         {imageUrl && (
           <Image
             src={imageUrl}

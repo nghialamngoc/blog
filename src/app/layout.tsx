@@ -1,10 +1,9 @@
 import type { Metadata } from 'next'
 import ThemeProvider from '@/components/ThemeProvider'
 import { RouterListener } from '@/components/RouterListener'
-
-import { Roboto_Mono } from 'next/font/google'
-
+import { Noto_Sans } from 'next/font/google'
 import { registerLanguage } from 'react-refractor'
+import clsx from 'clsx'
 
 import js from 'refractor/lang/javascript.js'
 import jsx from 'refractor/lang/jsx'
@@ -19,7 +18,7 @@ registerLanguage(js)
 registerLanguage(jsx)
 registerLanguage(typescript)
 
-const font = Roboto_Mono({ subsets: ['latin'] })
+const font = Noto_Sans({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -33,7 +32,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={font.className}>
+      <body className={clsx(font.className, 'font-light')}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <RouterListener />
 

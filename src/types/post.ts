@@ -1,13 +1,11 @@
 import { Image } from 'sanity'
+import { Category } from './category'
 
 export interface Post {
   _id: string
   title: string
   shortDescription: string
-  category?: {
-    label: string
-    value: string
-  }
+  category?: Category
   slug: string
   mainImage: Image
   summary: string

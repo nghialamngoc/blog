@@ -12,6 +12,12 @@ const config = {
         '2xl': '1400px',
       },
     },
+    fontSize: {
+      '20': '1.25rem',
+      '24': '1.5rem',
+      '28': '1.75rem',
+      '32': '2rem',
+    },
     spacing: {
       '0': '0px',
       '1': '1px',

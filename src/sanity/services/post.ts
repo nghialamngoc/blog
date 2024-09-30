@@ -15,6 +15,7 @@ export const postService = {
       category-> {
         label,
         'value': value.current,
+        'href': href.current,
         parent
       },
       mainImage,
