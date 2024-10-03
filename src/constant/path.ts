@@ -1,1 +1,1 @@
-export const POST_PATH = '/post'
+export const POST_PATH = '/post/'

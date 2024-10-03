@@ -5,6 +5,12 @@ const config = {
   content: ['./pages/**/*.{ts,tsx}', './components/**/*.{ts,tsx}', './app/**/*.{ts,tsx}', './src/**/*.{ts,tsx}'],
   prefix: '',
   theme: {
+    borderWidth: {
+      0: '0px',
+      1: '1px',
+      2: '2px',
+      3: '3px',
+    },
     container: {
       center: true,
       padding: '2rem',

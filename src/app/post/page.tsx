@@ -25,16 +25,16 @@ const Post: FC<PostProps> = async ({ searchParams: { page, perPage = 6, category
     <>
       {categories && <SubNav categories={categories} />}
       <Container>
-        <div className="grid md:grid-cols-3 gap-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
           {!!posts.length
             ? posts.map((post, index) => {
                 const imageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1000).url() : null
 
                 return (
-                  <div key={index} className="rounded-[16px] border">
+                  <div key={index} className="rounded-[16px] border-1">
                     {imageUrl && (
                       <Image
-                        className="w-full h-[300px] rounded-t-[16px] object-contain"
+                        className="w-full h-[200px] rounded-t-[16px] object-contain"
                         src={imageUrl}
                         alt=""
                         width={800}

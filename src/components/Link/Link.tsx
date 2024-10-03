@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 import { isModifiedEvent } from '@/utils/url'
 import { addBasePath } from 'next/dist/client/add-base-path'
 import { twMerge } from 'tailwind-merge'
+import { POST_PATH } from '@/constant/path'
 
 function shouldTriggerStartEvent(href: string, clickEvent?: React.MouseEvent) {
   const current = window.location

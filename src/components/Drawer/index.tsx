@@ -24,6 +24,7 @@ const Drawer: React.FC<DrawerProps> & {
   Overlay: React.FC<OverlayProps>
   Content: React.FC<ContentProps>
   Trigger: React.FC<TriggerProps>
+  ContentHeader: React.FC<ContentHeaderProps>
 } = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false)
 
@@ -42,7 +43,7 @@ const Overlay: React.FC<OverlayProps> = ({ className }) => {
 
   if (!isOpen) return null
 
-  return <div className={clsx('fixed inset-0 bg-black opacity-90 z-40', className)} onClick={onClose} />
+  return <div className={clsx('fixed inset-0 bg-[#00000066] z-40', className)} onClick={onClose} />
 }
 
 interface ContentProps {
@@ -51,20 +52,35 @@ interface ContentProps {
 }
 
 const Content: React.FC<ContentProps> = ({ className, children }) => {
-  const { isOpen, onClose } = useContext(DrawerContext)
+  const { isOpen } = useContext(DrawerContext)
 
   return (
     <div
       className={clsx(
-        'fixed top-0 left-0 h-full min-w-[360px] bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out',
+        'fixed top-0 left-0 h-full bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out',
         isOpen ? 'translate-x-0' : '-translate-x-full',
         className,
       )}
     >
-      <button className="absolute top-16 right-8 text-gray-500 hover:text-gray-700" onClick={onClose}>
-        <XIcon className="w-32 h-32" />
+      {children}
+    </div>
+  )
+}
+
+interface ContentHeaderProps {
+  className?: string
+  children?: ReactNode
+}
+
+const ContentHeader: React.FC<ContentHeaderProps> = ({ className, children }) => {
+  const { onClose } = useContext(DrawerContext)
+
+  return (
+    <div className={clsx('flex items-center p-16 justify-between border-b-1', className)}>
+      {children}
+      <button onClick={onClose}>
+        <XIcon className="w-30 h-30" color="grey" />
       </button>
-      <div className="p-4">{children}</div>
     </div>
   )
 }
@@ -76,11 +92,12 @@ interface TriggerProps {
 const Trigger: React.FC<TriggerProps> = ({ className }) => {
   const { onOpen } = useContext(DrawerContext)
 
-  return <MenuIcon className={clsx('w-32 h-32 shrink-0 cursor-pointer', className)} onClick={onOpen} />
+  return <MenuIcon className={clsx('w-28 h-28 shrink-0 cursor-pointer', className)} onClick={onOpen} />
 }
 
 Drawer.Overlay = Overlay
 Drawer.Content = Content
 Drawer.Trigger = Trigger
+Drawer.ContentHeader = ContentHeader
 
 export default Drawer
