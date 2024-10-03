@@ -43,7 +43,10 @@ export const SubmmaryTab: FC<SubmmaryTab> = ({ data, className }) => {
   }, [])
 
   return (
-    <div className={clsx('flex text-14 flex-col gap-8 w-[320px] p-16 sticky top-[80px] h-fit border-l-2', className)}>
+    <div
+      className={clsx('flex text-14 flex-col gap-8 w-[320px] p-16 sticky top-[80px] h-fit border-l-2 ml-16', className)}
+    >
+      <div className="mb-8 font-medium text-20">On this page</div>
       {data.map((x, index) => {
         const title = x.startsWith('-') || x.startsWith('+') ? x.slice(2) : x
         const id = idTransform(title)

@@ -48,7 +48,7 @@ export const SubNav: FC<SubNavProps> = ({ categories }) => {
   })
 
   return (
-    <div className={'flex px-32 py-16 gap-32 bg-grayLight'} ref={el}>
+    <div className={'flex px-16 py-16 lg:px-32 gap-32 bg-grayLight'} ref={el}>
       {categories.map((x, index) => {
         return (
           <Link key={index} href={x.href} className="text-black text-14">

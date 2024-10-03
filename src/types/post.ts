@@ -8,7 +8,7 @@ export interface Post {
   category?: Category
   slug: string
   mainImage: Image
-  summary: string
+  summary?: string[]
   content: any
   _createdAt: string
 }

@@ -8,6 +8,7 @@ import { postService } from '@/sanity/services'
 import { redirect } from 'next/navigation'
 import GoBack from '@/components/GoBack'
 import SubmmaryTab from '@/components/SummaryTab'
+import { POST_PATH } from '@/constant/path'
 
 export interface PostDetailProps {
   params: {
@@ -18,8 +19,6 @@ export interface PostDetailProps {
 const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
   const post = await postService.getPost(slug)
 
-  const summaryData = post?.summary?.split('\n') ?? []
-
   if (!post) {
     redirect('/')
   }
@@ -27,7 +26,7 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
 
   return (
     <Container className="relative flex">
-      <GoBack className="absolute" />
+      <GoBack className="absolute" href={POST_PATH} />
 
       <div className="grow">
         {post.category && (
@@ -51,10 +50,10 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
           />
         )}
 
-        <PortableTextCustom className="py-64 leading-7" content={post.content} />
+        <PortableTextCustom className="lg:py-32 leading-7" content={post.content} />
       </div>
 
-      {!!summaryData.length && <SubmmaryTab className="hidden xl:flex shrink-0" data={summaryData} />}
+      {!!post.summary?.length && <SubmmaryTab className="hidden xl:flex shrink-0" data={post.summary} />}
     </Container>
   )
 }

@@ -61,8 +61,16 @@ export const postService = {
       },
     })
 
-    info(`getPost ${slug}:`, result)
+    const summary =
+      result?.content?.reduce((prev: any, current: any) => {
+        if ((current.style === 'h2' || current.style === 'h3') && !!current.children?.[0]?.text) {
+          prev.push(`${current.style === 'h2' ? '- ' : '+ '}${current.children?.[0]?.text}`)
+        }
+        return prev
+      }, []) ?? []
 
-    return result
+    info(`getPost ${slug}:`, { ...result, summary })
+
+    return { ...result, summary }
   },
 }

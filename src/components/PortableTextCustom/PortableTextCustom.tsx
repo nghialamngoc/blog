@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { PortableText, PortableTextBlock, toPlainText } from 'next-sanity'
+import { PortableText, PortableTextBlock } from 'next-sanity'
 import Link from '@/components/Link'
 import { Refractor } from 'react-refractor'
 import { urlFor } from '@/sanity/lib/image'
@@ -34,14 +34,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
 
               return (
                 <h2 id={id} className="text-20 lg:text-24 font-semibold mt-16 mb-8">
-                  {id ? (
-                    <Link className={clsx(styles.link, 'w-fit flex items-center gap-8')} href={`#${id}`}>
-                      {children}
-                      <LinkIcon width={20} />
-                    </Link>
-                  ) : (
-                    children
-                  )}
+                  {children}
                 </h2>
               )
             },
@@ -51,14 +44,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
 
               return (
                 <h3 id={id} className="text-18 lg:text-24 font-semibold mt-16 mb-8">
-                  {id ? (
-                    <Link className={clsx(styles.link, 'w-fit flex items-center gap-8')} href={`#${id}`}>
-                      {children}
-                      <LinkIcon width={20} />
-                    </Link>
-                  ) : (
-                    children
-                  )}
+                  {children}
                 </h3>
               )
             },
@@ -105,15 +91,15 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
             },
             code: ({ value: { code, language = 'javascript', filename } }: any) => {
               return (
-                <div className="my-24 max-w-[800px]">
+                <div className="my-24">
                   {filename && (
-                    <div className="flex items-center justify-between bg-[#f5f2f0] rounded-t-[10px] text-black py-8 px-16 border-b border-gray">
+                    <div className="flex items-center justify-between bg-[#f1f3f4] rounded-t-[10px] text-black py-8 px-16 border-b border-[#e6e6e6]">
                       {filename}
                       <Copy data={code} />
                     </div>
                   )}
                   <Refractor
-                    className={clsx('max-h-[600px] text-14', filename ? 'rounded-b-[10px]' : 'rounded-[10px]')}
+                    className={clsx(styles.code, filename ? 'rounded-b-[10px]' : 'rounded-[10px]')}
                     language={language}
                     value={code}
                   />

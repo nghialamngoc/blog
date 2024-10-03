@@ -31,3 +31,19 @@
 .link:hover svg {
   display: inline-block;
 }
+
+.code {
+  width: calc(100vw - 32px);
+  max-width: 100%;
+  max-height: 600px;
+  font-size: 14px;
+}
+
+@mixin media lg {
+  .code {
+    width: unset;
+    max-width: 100%;
+    max-height: 600px;
+    font-size: 14px;
+  }
+}
