@@ -1,4 +1,4 @@
-import { POST_PATH } from '@/constant/path'
+import { POST_PATH } from '@/config/constants'
 import Link from '../Link'
 
 export const HeaderLogo = () => {

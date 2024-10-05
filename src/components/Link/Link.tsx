@@ -1,13 +1,12 @@
 'use client'
 
-import NProgress from 'nprogress'
-import NextLink from 'next/link'
-import { ComponentProps, forwardRef } from 'react'
-import { usePathname } from 'next/navigation'
 import { isModifiedEvent } from '@/utils/url'
 import { addBasePath } from 'next/dist/client/add-base-path'
+import NextLink from 'next/link'
+import { usePathname } from 'next/navigation'
+import NProgress from 'nprogress'
+import { ComponentProps, forwardRef } from 'react'
 import { twMerge } from 'tailwind-merge'
-import { POST_PATH } from '@/constant/path'
 
 function shouldTriggerStartEvent(href: string, clickEvent?: React.MouseEvent) {
   const current = window.location

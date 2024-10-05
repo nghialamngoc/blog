@@ -4,6 +4,7 @@ import ModeToggle from '@/components/ModeToggle'
 import { categoryService } from '@/sanity/services'
 import { HeaderMenuDrawer } from './HeaderMenu'
 import { HeaderLogo } from './HeaderLogo'
+import Search from '../Search'
 
 export const Header = async () => {
   const categories = await categoryService.getTopNavigationCategories()
@@ -29,7 +30,11 @@ export const Header = async () => {
             </div>
           )}
         </Container>
-        <ModeToggle />
+
+        <div className="flex items-center gap-16">
+          <Search />
+          <ModeToggle />
+        </div>
       </div>
     </div>
   )

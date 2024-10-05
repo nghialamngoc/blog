@@ -1,0 +1,15 @@
+.dialog {
+  width: 100vw;
+  height: 100dvh;
+  position: fixed;
+  inset: 0;
+  z-index: var(--zIndex-floating);
+  overflow: auto;
+  overscroll-behavior-y: none;
+  display: flex;
+}
+
+.centered {
+  align-items: center;
+  justify-content: center;
+}

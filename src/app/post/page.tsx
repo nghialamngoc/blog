@@ -6,6 +6,7 @@ import { urlFor } from '@/sanity/lib/image'
 import { RouterPagination } from '@/components/Pagination/RouterPagination'
 import { categoryService, postService } from '@/sanity/services'
 import SubNav from '@/components/SubNav'
+import { DEFAULT_ITEM_PER_PAGE } from '@/config/constants'
 
 interface PostProps {
   searchParams: {
@@ -15,7 +16,7 @@ interface PostProps {
   }
 }
 
-const Post: FC<PostProps> = async ({ searchParams: { page, perPage = 6, category } }) => {
+const Post: FC<PostProps> = async ({ searchParams: { page, perPage = DEFAULT_ITEM_PER_PAGE, category } }) => {
   const categories = await categoryService.getCategoriesByParent('Post')
   const ids = categories.map((x) => x._id)
 
@@ -25,7 +26,7 @@ const Post: FC<PostProps> = async ({ searchParams: { page, perPage = 6, category
     <>
       {categories && <SubNav categories={categories} />}
       <Container>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-16">
+        <div className="my-24 grid md:grid-cols-2 lg:grid-cols-3 gap-16">
           {!!posts.length
             ? posts.map((post, index) => {
                 const imageUrl = post.mainImage ? urlFor(post.mainImage)?.width(1000).url() : null
@@ -39,6 +40,7 @@ const Post: FC<PostProps> = async ({ searchParams: { page, perPage = 6, category
                         alt=""
                         width={800}
                         height={800}
+                        priority
                       />
                     )}
 

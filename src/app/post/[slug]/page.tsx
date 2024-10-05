@@ -8,7 +8,7 @@ import { postService } from '@/sanity/services'
 import { redirect } from 'next/navigation'
 import GoBack from '@/components/GoBack'
 import SubmmaryTab from '@/components/SummaryTab'
-import { POST_PATH } from '@/constant/path'
+import { POST_PATH } from '@/config/constants'
 
 export interface PostDetailProps {
   params: {

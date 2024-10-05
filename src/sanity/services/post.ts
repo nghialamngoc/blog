@@ -1,9 +1,10 @@
 import { Post } from '@/types/post'
 import { sanityFetch } from '../lib/client'
 import { info } from '@/utils/safety-log'
+import { DEFAULT_ITEM_PER_PAGE } from '@/config/constants'
 
 export const postService = {
-  getPostList: async (ids: string[], page: number = 1, perPage: number = 6, category?: string) => {
+  getPostList: async (ids: string[], page: number = 1, perPage: number = DEFAULT_ITEM_PER_PAGE, category?: string) => {
     const query = `*[_type == 'post'
       && category._ref in ${JSON.stringify(ids)}
       ${category ? `&& category._ref match *[_type=='category' && value.current=='${category}'][0]._id` : ''}
