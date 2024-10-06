@@ -1,12 +1,12 @@
 'use client'
 
-import Drawer from '@/components/Drawer'
 import { TopNavigationCategory } from '@/types/category'
 import clsx from 'clsx'
 import { ArrowRight } from 'lucide-react'
 import { FC } from 'react'
 import Link from '../Link'
 import { HeaderLogo } from './HeaderLogo'
+import { Drawer, DrawerContent, DrawerHeader, DrawerOverlay, DrawerTrigger } from '@/components/Drawer'
 
 export interface HeaderMenuDrawerProps {
   categories: TopNavigationCategory[]
@@ -17,12 +17,12 @@ export const HeaderMenuDrawer: FC<HeaderMenuDrawerProps> = ({ className, categor
   return (
     <div className={clsx('md:hidden', className)}>
       <Drawer>
-        <Drawer.Trigger />
-        <Drawer.Overlay />
-        <Drawer.Content className="w-[280px]">
-          <Drawer.ContentHeader>
+        <DrawerTrigger />
+        <DrawerOverlay />
+        <DrawerContent className="w-[280px]">
+          <DrawerHeader>
             <HeaderLogo />
-          </Drawer.ContentHeader>
+          </DrawerHeader>
 
           <div>
             {categories.map(({ label, href, children }, index) => {
@@ -52,7 +52,7 @@ export const HeaderMenuDrawer: FC<HeaderMenuDrawerProps> = ({ className, categor
               )
             })}
           </div>
-        </Drawer.Content>
+        </DrawerContent>
       </Drawer>
     </div>
   )

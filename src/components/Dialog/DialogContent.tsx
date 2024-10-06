@@ -14,7 +14,7 @@ export const DialogContent = forwardRef<HTMLDivElement, HTMLProps<HTMLDivElement
       data-testid="DialogContent"
       className={clsx(
         styles.content,
-        'flex flex-column gap-12 relative w-full bg-white',
+        'flex flex-col gap-12 relative w-full bg-white',
         'py-16 mx-16 rounded-[16px]',
         'md:py-24 md:gap-16',
         'lg:py-32',
