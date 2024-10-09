@@ -1,5 +1,5 @@
 import { ChangeEvent, FC, InputHTMLAttributes, useCallback, useEffect, useRef, useState } from 'react'
-import { clearTimeout } from 'timers'
+import { clearTimeout, setTimeout } from 'timers'
 
 export interface DebouncedInputProps extends InputHTMLAttributes<HTMLInputElement> {
   onDebounce: (value: string) => void
@@ -18,7 +18,8 @@ export const DebouncedInput: FC<DebouncedInputProps> = ({ onDebounce, debounceTi
         }
 
         timerRef.current = setTimeout(() => {
-          return func(...args)
+          func(...args)
+          timerRef.current = null
         }, debounceTime)
       }
     },
