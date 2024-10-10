@@ -14,6 +14,9 @@ import { error } from '@/utils/safety-log'
 import axios from 'axios'
 import Spiner from '../../../../public/spiner.gif'
 import Image from 'next/image'
+import { isCancel } from 'axios'
+
+let controller: AbortController
 
 export interface SearchModalProps {
   onClose?: () => void
@@ -44,17 +47,24 @@ export const SearchModal = NiceModal.create<SearchModalProps>(({ onClose }) => {
     try {
       setLoading(true)
       setErrorMsg(null)
+      controller?.abort()
+      controller = new AbortController()
 
-      const response = await axios.get(`/api/test/?search=${search}&page=${page}`)
+      const response = await axios.get(`/api/test/?search=${search}&page=${page}`, {
+        signal: controller.signal,
+      })
       const result = response?.data?.data ?? []
 
       page === 1 ? setData(result) : setData((prev) => [...prev, ...result])
       setHasMore(result.length > 0)
-    } catch (err) {
-      error(err)
-      setErrorMsg(err instanceof Error ? err : new Error('Có lỗi xảy ra vui lòng thử lại sau!'))
-    } finally {
       setLoading(false)
+    } catch (err) {
+      if (!isCancel(err)) {
+        error(err)
+        setErrorMsg(err instanceof Error ? err : new Error('Có lỗi xảy ra vui lòng thử lại sau!'))
+        setLoading(false)
+        return
+      }
     }
   }
 
