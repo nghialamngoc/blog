@@ -7,7 +7,8 @@ import clsx from 'clsx'
 import Copy from '../Copy'
 import styles from './PortableTextCustom.module.css'
 import { idTransform } from '@/utils/string'
-import { LinkIcon } from 'lucide-react'
+import TypescriptIcon from '../Icons/TypescriptIcon'
+import { LanguageIcon } from '../LanguageIcon/LanguageIcon'
 
 export interface PortableTextCustomProps {
   className?: string
@@ -76,7 +77,7 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
                           <tr key={i}>
                             {x?.cells.map((y: string, z: number) => {
                               return (
-                                <td className="border-l border-b border-gray py-6 px-16 text-left" key={i + '_' + z}>
+                                <td className="border-l border-b-1 border-gray py-6 px-16 text-left" key={i + '_' + z}>
                                   {y}
                                 </td>
                               )
@@ -93,8 +94,12 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
               return (
                 <div className="my-24">
                   {filename && (
-                    <div className="flex items-center justify-between bg-[#f1f3f4] rounded-t-[10px] text-black py-8 px-16 border-b border-[#e6e6e6]">
-                      {filename}
+                    <div className="flex items-center justify-between bg-[#f1f3f4] rounded-t-[10px] text-black py-8 px-16 border-b-1 border-[#e6e6e6]">
+                      <div className="flex items-center gap-4">
+                        <LanguageIcon language={language} width={20} height={20} />
+                        {filename}
+                      </div>
+
                       <Copy data={code} />
                     </div>
                   )}

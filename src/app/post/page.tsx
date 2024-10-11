@@ -46,7 +46,7 @@ const Post: FC<PostProps> = async ({ searchParams: { page, perPage = DEFAULT_ITE
 
                     <div className="flex flex-col p-16 gap-4">
                       <div className="italic text-14">
-                        {new Date(post._createdAt).toLocaleDateString()} - {post?.category?.label}
+                        {post._createdAt && new Date(post._createdAt).toLocaleDateString()} - {post?.category?.label}
                       </div>
 
                       <Link href={post.slug}>

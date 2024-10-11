@@ -15,6 +15,7 @@ import axios from 'axios'
 import Spiner from '../../../../public/spiner.gif'
 import Image from 'next/image'
 import { isCancel } from 'axios'
+import HighlightText from '@/components/HighlightText'
 
 let controller: AbortController
 
@@ -111,8 +112,10 @@ export const SearchModal = NiceModal.create<SearchModalProps>(({ onClose }) => {
                   ref={index === data.length - 1 ? lastPostElementRef : null}
                   className="border-1 rounded-lg px-8 py-8"
                 >
-                  <div>{post.title}</div>
-                  <div className="text-[12px]">{post.shortDescription}</div>
+                  <HighlightText text={post.title} highlightText={searchValue} />
+                  {post.shortDescription && (
+                    <HighlightText className="text-[12px]" text={post.shortDescription} highlightText={searchValue} />
+                  )}
                 </div>
               )
             })}

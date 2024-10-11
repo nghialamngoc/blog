@@ -37,7 +37,7 @@ export const HeaderMenuDrawer: FC<HeaderMenuDrawerProps> = ({ className, categor
                       {children.map((child, i) => {
                         return (
                           <Link
-                            className="flex text-[14px] justify-between items-center text-black"
+                            className="flex text-14 justify-between items-center text-black"
                             key={`${index}-${i}`}
                             href={child.href}
                           >
