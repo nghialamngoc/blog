@@ -4,7 +4,7 @@ import clsx from 'clsx'
 import { FC } from 'react'
 import { usePathname, useSearchParams } from 'next/navigation'
 import { getPages } from './get-pages'
-import Link from '@/components/Link'
+import Link from '@/ui/Link'
 
 const parsePage = (page: string | null) => {
   if (page) {

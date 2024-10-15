@@ -3,7 +3,7 @@
 import { FC } from 'react'
 import { Category } from '@/types/category'
 import { usePathname, useSearchParams } from 'next/navigation'
-import Link from '@/components/Link'
+import Link from '@/ui/Link'
 import clsx from 'clsx'
 
 interface TopNavigation {

@@ -8,6 +8,7 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   className?: string
   onClick?: () => void
   design?: 'v1' | 'v2'
+  isLoading?: boolean
 }
 
 export const Button: FC<ButtonProps> = ({ design, ...rest }) => {

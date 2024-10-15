@@ -1,13 +1,12 @@
 export const revalidate = 60
 
-import { v4 as uuidv4 } from 'uuid'
-import { faker } from '@faker-js/faker'
 import { Post } from '@/types/post'
 import { delay } from '@/utils/delay'
-import { NextApiRequest } from 'next'
+import { faker } from '@faker-js/faker'
 import { NextRequest } from 'next/server'
+import { v4 as uuidv4 } from 'uuid'
 
-export const generateRandomPosts = (count: number = 10, titlePrefix: string = ''): Post[] => {
+const generateRandomPosts = (count: number = 10, titlePrefix: string = ''): Post[] => {
   return Array.from({ length: count }, (): Post => {
     const randomWords = faker.lorem.words(3).split(' ')
     let title: string

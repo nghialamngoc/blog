@@ -4,7 +4,7 @@ import { TopNavigationCategory } from '@/types/category'
 import clsx from 'clsx'
 import { ArrowRight } from 'lucide-react'
 import { FC } from 'react'
-import Link from '../Link'
+import Link from '../../ui/Link'
 import { HeaderLogo } from './HeaderLogo'
 import { Drawer, DrawerContent, DrawerHeader, DrawerOverlay, DrawerTrigger } from '@/components/Drawer'
 

@@ -1,5 +1,5 @@
-import Link from '@/components/Link'
-import Container from '@/components/Container'
+import Link from '@/ui/Link'
+import Container from '@/ui/Container'
 import ModeToggle from '@/components/ModeToggle'
 import { categoryService } from '@/sanity/services'
 import { HeaderMenuDrawer } from './HeaderMenu'

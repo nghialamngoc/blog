@@ -1,4 +1,4 @@
-import Container from '@/components/Container'
+import Container from '@/ui/Container'
 
 const Home = async () => {
   return <Container>Home Page</Container>

@@ -1,15 +1,18 @@
-import { FC } from 'react'
-import { ButtonProps } from '../Button'
 import clsx from 'clsx'
+import { forwardRef } from 'react'
+import { ButtonProps } from '../Button'
+import styles from './ButtonV1.module.css'
 
-export const ButtonV1: FC<ButtonProps> = ({ children, className, onClick, ...rest }) => {
-  return (
-    <button
-      className={clsx('text-14 font-medium hover:bg-grayLight px-12 py-6 rounded-lg shadow-md', className)}
-      onClick={onClick}
-      {...rest}
-    >
-      {children}
-    </button>
-  )
-}
+export const ButtonV1 = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ children, className, isLoading, onClick, ...rest }, ref) => {
+    const styleProps = {
+      className: clsx(styles.root, 'hover:bg-grayLight shadow-md', className),
+      'data-loading': isLoading,
+    }
+    return (
+      <button ref={ref} {...styleProps} onClick={onClick} {...rest}>
+        <span>{children}</span>
+      </button>
+    )
+  },
+)

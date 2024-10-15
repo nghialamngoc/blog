@@ -2,7 +2,7 @@
 
 import { Category } from '@/types/category'
 import { FC, useCallback, useEffect, useRef } from 'react'
-import Link from '../Link'
+import Link from '../../ui/Link'
 
 import styles from './SubNav.module.css'
 import { isClient } from '@/utils/common'

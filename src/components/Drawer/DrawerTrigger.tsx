@@ -10,7 +10,7 @@ export const DrawerTrigger = forwardRef<HTMLDivElement, HTMLAttributes<HTMLEleme
 
     return (
       <div ref={ref} className={clsx('flex cursor-pointer', className)} onClick={() => setOpen(true)} {...rest}>
-        <MenuIcon className="w-28 h-28 shrink-0" />
+        <MenuIcon className="w-20 h-20 shrink-0" />
       </div>
     )
   },

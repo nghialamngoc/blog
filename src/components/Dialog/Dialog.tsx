@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react'
-import { Portal } from '../Portal'
+import { Portal } from '../../ui/Portal'
 import { UseDialogProps, useDialog } from './use-dialog'
 import { DialogProvider } from './DialogContext'
 import clsx from 'clsx'

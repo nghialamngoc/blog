@@ -1,7 +1,7 @@
 import { FC, SVGProps } from 'react'
-import TypescriptIcon from '../Icons/TypescriptIcon'
-import JavascriptIcon from '../Icons/JavascriptIcon'
-import ReactJsIcon from '../Icons/ReactJsIcon'
+import TypescriptIcon from '@/ui/Icons/TypescriptIcon'
+import JavascriptIcon from '@/ui/Icons/JavascriptIcon'
+import ReactJsIcon from '@/ui/Icons/ReactJsIcon'
 
 const icons = {
   typescript: TypescriptIcon,

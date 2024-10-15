@@ -1,8 +1,8 @@
 import { FC } from 'react'
-import Container from '@/components/Container'
+import Container from '@/ui/Container'
 import PortableTextCustom from '@/components/PortableTextCustom'
 import Image from 'next/image'
-import Link from '@/components/Link'
+import Link from '@/ui/Link'
 import { urlFor } from '@/sanity/lib/image'
 import { postService } from '@/sanity/services'
 import { redirect } from 'next/navigation'
@@ -38,7 +38,9 @@ const PostDetail: FC<PostDetailProps> = async ({ params: { slug } }) => {
         )}
 
         <h1 className="max-w-[800px] mx-auto text-20 lg:text-32 text-center font-bold">{post.title}</h1>
-        <div className="text-center italic text-12 mb-32">{new Date(post._createdAt).toLocaleDateString()}</div>
+        {post._createdAt && (
+          <div className="text-center italic text-12 mb-32">{new Date(post._createdAt).toLocaleDateString()}</div>
+        )}
         {imageUrl && (
           <Image
             src={imageUrl}

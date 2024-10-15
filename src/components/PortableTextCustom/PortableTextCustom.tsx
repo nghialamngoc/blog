@@ -1,14 +1,13 @@
-import { FC } from 'react'
-import { PortableText, PortableTextBlock } from 'next-sanity'
-import Link from '@/components/Link'
-import { Refractor } from 'react-refractor'
+import Link from '@/ui/Link'
 import { urlFor } from '@/sanity/lib/image'
-import clsx from 'clsx'
-import Copy from '../Copy'
-import styles from './PortableTextCustom.module.css'
 import { idTransform } from '@/utils/string'
-import TypescriptIcon from '../Icons/TypescriptIcon'
+import clsx from 'clsx'
+import { PortableText, PortableTextBlock } from 'next-sanity'
+import { FC } from 'react'
+import { Refractor } from 'react-refractor'
+import Copy from '../Copy'
 import { LanguageIcon } from '../LanguageIcon/LanguageIcon'
+import styles from './PortableTextCustom.module.css'
 
 export interface PortableTextCustomProps {
   className?: string
