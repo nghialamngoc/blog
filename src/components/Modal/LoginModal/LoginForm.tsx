@@ -1,11 +1,14 @@
-import { SERVER_LOGIN_PATH } from '@/config/constants'
+import { useAuthContext } from '@/auth/AuthContext'
+import { API_LOGIN_PATH } from '@/config/constants'
 import { SECRET_KEY } from '@/config/env'
+import axiosInstance from '@/lib/axios'
 import Button from '@/ui/Button'
 import FormikInput from '@/ui/Form/FormInput'
-import axios from 'axios'
+import { getErrorMessage } from '@/utils/get-error-msg'
+import { isCancel } from 'axios'
 import CryptoJS from 'crypto-js'
 import { Form, FormikProvider, useFormik } from 'formik'
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import * as Yup from 'yup'
 
 const validationSchema = Yup.object({
@@ -16,15 +19,24 @@ const validationSchema = Yup.object({
     .required('Vui lòng nhập password.'),
 })
 
-const LoginForm: React.FC = () => {
+let controller: AbortController
+
+interface LoginFormProps {
+  onHide: () => void
+}
+
+const LoginForm: FC<LoginFormProps> = ({ onHide }) => {
   const [isLoading, setLoading] = useState(false)
   const [errMsg, setErrMsg] = useState('')
+  const { setUser } = useAuthContext()
 
   const formik = useFormik({
-    initialValues: { email: '', password: '' },
+    initialValues: { email: 'nghialamngocit@gmail.com', password: 'Today@2023V14' },
     validationSchema,
     onSubmit: async ({ email, password }) => {
       try {
+        controller?.abort()
+        controller = new AbortController()
         setLoading(true)
         if (!SECRET_KEY) {
           setErrMsg('Có lỗi sảy ra vui lòng thử lại sau.')
@@ -35,17 +47,25 @@ const LoginForm: React.FC = () => {
         // Hash password và mã hóa email
         const hashedPassword = CryptoJS.HmacSHA256(password, SECRET_KEY).toString()
 
-        await axios.post(SERVER_LOGIN_PATH, {
-          email,
-          password: hashedPassword,
-        })
-      } catch (err) {
-        if (err instanceof Error) {
-          setErrMsg(err.message)
-          return
-        }
+        const { data } = await axiosInstance.post(
+          API_LOGIN_PATH,
+          {
+            email,
+            password: hashedPassword,
+          },
+          {
+            signal: controller.signal,
+          },
+        )
 
-        setErrMsg('Có lỗi xảy ra vui lòng thử lại.')
+        if (data.user) {
+          setUser(data.user)
+          onHide()
+        }
+      } catch (err) {
+        if (!isCancel(err)) {
+          setErrMsg(getErrorMessage(err) ?? 'Có lỗi xảy ra vui lòng thử lại.')
+        }
       } finally {
         setLoading(false)
       }

@@ -11,7 +11,7 @@ import RegisterForm from './RegisterForm'
 export interface LoginModalProps {}
 
 export const LoginModal = NiceModal.create<LoginModalProps>((props) => {
-  const [mode, setMode] = useState(2)
+  const [mode, setMode] = useState(1)
 
   const modal = useModal()
 
@@ -29,7 +29,7 @@ export const LoginModal = NiceModal.create<LoginModalProps>((props) => {
         <DialogBody className="mt-8">
           {mode === 1 ? (
             <>
-              <LoginForm />
+              <LoginForm onHide={onHide} />
               <div className="mt-10 text-14 text-center">
                 Chưa có tài khoản?
                 <span className="pl-4 underline cursor-pointer text-orange-400" onClick={() => setMode(2)}>

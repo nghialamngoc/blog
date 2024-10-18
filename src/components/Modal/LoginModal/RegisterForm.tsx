@@ -1,4 +1,4 @@
-import { SERVER_REGISTER_PATH } from '@/config/constants'
+import { API_REGISTER_PATH } from '@/config/constants'
 import { SECRET_KEY } from '@/config/env'
 import Button from '@/ui/Button'
 import FormikInput from '@/ui/Form/FormInput'
@@ -39,7 +39,7 @@ const RegisterForm: React.FC = () => {
         // Hash password và mã hóa email
         const hashedPassword = CryptoJS.HmacSHA256(password, SECRET_KEY).toString()
 
-        await axios.post(SERVER_REGISTER_PATH, {
+        await axios.post(API_REGISTER_PATH, {
           email,
           password: hashedPassword,
         })

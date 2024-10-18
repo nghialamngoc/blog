@@ -60,7 +60,7 @@ export const SearchModal = NiceModal.create<SearchModalProps>(({ onClose }) => {
       setLoading(false)
     } catch (err) {
       if (!isCancel(err)) {
-        error(err)
+        error('fetchMoreItems error: ', err)
         setErrorMsg(err instanceof Error ? err : new Error('Có lỗi xảy ra vui lòng thử lại sau!'))
         setLoading(false)
         return

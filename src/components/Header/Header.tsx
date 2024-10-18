@@ -32,10 +32,9 @@ export const Header = async () => {
           )}
         </Container>
 
-        <div className="flex items-center gap-16">
+        <div className="flex items-center gap-16 shrink-0">
           <Search />
           <ModeToggle />
-
           <HeaderUser />
         </div>
       </div>

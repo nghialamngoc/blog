@@ -1,18 +1,38 @@
+import { API_USER_ME_PATH } from '@/config/constants'
+import axiosInstance from '@/lib/axios'
 import { User } from '@/types/user'
-import { useState } from 'react'
+import { error } from '@/utils/safety-log'
+import { useEffect, useState } from 'react'
 
-export interface UseAuthProps {
-  user: User | null
-  loading: boolean
-  login: (email: string, password: string) => Promise<void>
-  logout: () => void
-}
+export interface UseAuthProps {}
 
 export const useAuth = (props: UseAuthProps) => {
   const [user, setUser] = useState<User | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const initAuth = async () => {
+      try {
+        const userData: User = await axiosInstance.get(API_USER_ME_PATH)
+        setUser(userData)
+      } catch (err) {
+        error('initAuth error: ', err)
+      }
+      setIsLoading(false)
+    }
+
+    initAuth()
+  }, [])
+
+  const logout = () => {
+    // call api logout
+    setUser(null)
+  }
 
   return {
-    ...props,
+    user,
+    isLoading,
+    logout,
+    setUser,
   }
 }
