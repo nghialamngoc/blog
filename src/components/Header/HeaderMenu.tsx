@@ -7,6 +7,7 @@ import { FC } from 'react'
 import Link from '../../ui/Link'
 import { HeaderLogo } from './HeaderLogo'
 import { Drawer, DrawerContent, DrawerHeader, DrawerOverlay, DrawerTrigger } from '@/components/Drawer'
+import { HeaderUser } from './HeaderUser'
 
 export interface HeaderMenuDrawerProps {
   categories: TopNavigationCategory[]
@@ -19,9 +20,12 @@ export const HeaderMenuDrawer: FC<HeaderMenuDrawerProps> = ({ className, categor
       <Drawer>
         <DrawerTrigger />
         <DrawerOverlay />
-        <DrawerContent className="w-[280px]">
+        <DrawerContent className="w-full max-w-[340px]">
           <DrawerHeader>
-            <HeaderLogo />
+            <div className="flex grow justify-between mr-2">
+              <HeaderLogo />
+              <HeaderUser />
+            </div>
           </DrawerHeader>
 
           <div>

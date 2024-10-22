@@ -35,7 +35,9 @@ export const Header = async () => {
         <div className="flex items-center gap-16 shrink-0">
           <Search />
           <ModeToggle />
-          <HeaderUser />
+          <div className="hidden md:block">
+            <HeaderUser />
+          </div>
         </div>
       </div>
     </div>

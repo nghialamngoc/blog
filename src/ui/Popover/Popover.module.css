@@ -1,0 +1,41 @@
+.popoverContent {
+  margin: 0;
+  list-style: none;
+  outline: 0;
+  width: fit-content;
+  z-index: 99;
+}
+
+.popoverContentTransition {
+  border-radius: 10px;
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 24%);
+  background-color: var(--white);
+}
+
+.popoverArrow {
+  width: 8px;
+  height: 8px;
+  transform: rotate(45deg);
+  background-color: rgb(255, 255, 255);
+  position: absolute;
+}
+
+.popoverArrow[data-placement='top'] {
+  box-shadow: rgb(0 0 0 / 12%) -4px -4px 4px 0px;
+  top: -4px;
+}
+
+.popoverArrow[data-placement='bottom'] {
+  box-shadow: rgb(0 0 0 / 12%) 4px 4px 4px 0px;
+  bottom: -4px;
+}
+
+.popoverArrow[data-placement='left'] {
+  box-shadow: rgb(0 0 0 / 12%) -4px 4px 4px 0px;
+  left: -4px;
+}
+
+.popoverArrow[data-placement='right'] {
+  box-shadow: 0 0 5px 0 rgb(0 0 0 / 24%);
+  right: -4px;
+}

@@ -1,4 +1,4 @@
-import { API_USER_ME_PATH } from '@/config/constants'
+import { API_LOGOUT_PATH, API_USER_ME_PATH } from '@/config/constants'
 import axiosInstance from '@/lib/axios'
 import { User } from '@/types/user'
 import { error } from '@/utils/safety-log'
@@ -13,20 +13,29 @@ export const useAuth = (props: UseAuthProps) => {
   useEffect(() => {
     const initAuth = async () => {
       try {
-        const userData: User = await axiosInstance.get(API_USER_ME_PATH)
-        setUser(userData)
+        setIsLoading(true)
+        const { data } = await axiosInstance.get(API_USER_ME_PATH)
+        setUser(data)
       } catch (err) {
         error('initAuth error: ', err)
+      } finally {
+        setIsLoading(false)
       }
-      setIsLoading(false)
     }
 
     initAuth()
   }, [])
 
-  const logout = () => {
-    // call api logout
-    setUser(null)
+  const logout = async () => {
+    try {
+      setIsLoading(true)
+      await axiosInstance.get(API_LOGOUT_PATH)
+    } catch (err) {
+      error('initAuth error: ', err)
+    } finally {
+      setUser(null)
+      setIsLoading(false)
+    }
   }
 
   return {
