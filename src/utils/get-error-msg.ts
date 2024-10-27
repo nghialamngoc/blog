@@ -21,7 +21,7 @@ export const getErrorMessage = (error: unknown): string => {
     }
 
     // Nếu là lỗi khác
-    return error.message || 'An unexpected error occurred'
+    return error.message || 'Có lỗi xảy ra vui lòng thử lại.'
   }
 
   // Nếu không phải AxiosError

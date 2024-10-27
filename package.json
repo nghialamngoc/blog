@@ -14,6 +14,7 @@
     "@faker-js/faker": "^9.0.3",
     "@floating-ui/react": "^0.26.25",
     "@floating-ui/react-dom": "^2.1.2",
+    "@react-oauth/google": "^0.12.1",
     "@sanity/code-input": "^4.1.4",
     "@sanity/image-url": "^1.0.2",
     "@sanity/react-loader": "^1.10.4",

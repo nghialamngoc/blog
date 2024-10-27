@@ -44,7 +44,7 @@ const RegisterForm: React.FC = () => {
           password: hashedPassword,
         })
       } catch (err) {
-        setErrMsg(getErrorMessage(err) ?? 'Có lỗi xảy ra vui lòng thử lại.')
+        setErrMsg(getErrorMessage(err))
       } finally {
         setLoading(false)
       }

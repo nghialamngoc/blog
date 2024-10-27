@@ -1,14 +1,14 @@
 import { useAuthContext } from '@/auth/AuthContext'
-import { API_LOGIN_PATH } from '@/config/constants'
 import { SECRET_KEY } from '@/config/env'
-import axiosInstance from '@/lib/axios'
 import Button from '@/ui/Button'
+import Divider from '@/ui/Divider'
 import FormikInput from '@/ui/Form/FormInput'
+import GoogleIcon from '@/ui/Icons/GoogleIcon'
 import { getErrorMessage } from '@/utils/get-error-msg'
-import { isCancel } from 'axios'
+import { useGoogleLogin } from '@react-oauth/google'
 import CryptoJS from 'crypto-js'
 import { Form, FormikProvider, useFormik } from 'formik'
-import React, { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import * as Yup from 'yup'
 
 const validationSchema = Yup.object({
@@ -19,8 +19,6 @@ const validationSchema = Yup.object({
     .required('Vui lòng nhập password.'),
 })
 
-let controller: AbortController
-
 interface LoginFormProps {
   onHide: () => void
 }
@@ -28,44 +26,43 @@ interface LoginFormProps {
 const LoginForm: FC<LoginFormProps> = ({ onHide }) => {
   const [isLoading, setLoading] = useState(false)
   const [errMsg, setErrMsg] = useState('')
-  const { setUser } = useAuthContext()
+  const { loginWithEmail } = useAuthContext()
+
+  const { loginWithGoogle } = useAuthContext()
+
+  const handleGoogleLogin = useGoogleLogin({
+    onSuccess: async (tokenResponse) => {
+      try {
+        setLoading(true)
+        setErrMsg('')
+        // Gọi API backend với token từ Google
+        await loginWithGoogle(tokenResponse.access_token)
+        onHide()
+      } catch (error) {
+        console.error('Google login failed:', error)
+      } finally {
+        setLoading(false)
+      }
+    },
+    onError: (error) => {
+      console.error('Google login error:', error)
+    },
+  })
 
   const formik = useFormik({
     initialValues: { email: 'nghialamngocit@gmail.com', password: 'Today@2023V14' },
     validationSchema,
     onSubmit: async ({ email, password }) => {
       try {
-        controller?.abort()
-        controller = new AbortController()
         setLoading(true)
-        if (!SECRET_KEY) {
-          setErrMsg('Có lỗi sảy ra vui lòng thử lại sau.')
-          return
-        }
-
         setErrMsg('')
-        // Hash password và mã hóa email
+
         const hashedPassword = CryptoJS.HmacSHA256(password, SECRET_KEY).toString()
+        await loginWithEmail(email, hashedPassword)
 
-        const { data } = await axiosInstance.post(
-          API_LOGIN_PATH,
-          {
-            email,
-            password: hashedPassword,
-          },
-          {
-            signal: controller.signal,
-          },
-        )
-
-        if (data.user) {
-          setUser(data.user)
-          onHide()
-        }
+        onHide()
       } catch (err) {
-        if (!isCancel(err)) {
-          setErrMsg(getErrorMessage(err) ?? 'Có lỗi xảy ra vui lòng thử lại.')
-        }
+        setErrMsg(getErrorMessage(err))
       } finally {
         setLoading(false)
       }
@@ -77,22 +74,30 @@ const LoginForm: FC<LoginFormProps> = ({ onHide }) => {
   }, [formik.values])
 
   return (
-    <FormikProvider value={formik}>
-      <Form className="flex flex-col gap-12" onSubmit={formik.handleSubmit} noValidate>
-        <FormikInput className="text-14" name="email" type="email" placeholder="Email" />
-        <FormikInput className="text-14" name="password" type="password" placeholder="Password" />
-        <Button
-          design="v1"
-          type="submit"
-          disabled={isLoading}
-          isLoading={isLoading}
-          className="mt-4 h-40 bg-orange-400 text-white hover:text-black"
-        >
-          Đăng nhập
-        </Button>
-        {errMsg && <div className="mt-4 text-red-700 text-14">{errMsg}</div>}
-      </Form>
-    </FormikProvider>
+    <div>
+      <Button design="v1" onClick={handleGoogleLogin} className="mb-16 w-full h-[40px]">
+        <div className="flex gap-8">
+          <GoogleIcon width={22} height={22} /> Google
+        </div>
+      </Button>
+      <Divider>Hoặc</Divider>
+      <FormikProvider value={formik}>
+        <Form className="flex flex-col gap-12" onSubmit={formik.handleSubmit} noValidate>
+          <FormikInput className="text-14" name="email" type="email" placeholder="Email" />
+          <FormikInput className="text-14" name="password" type="password" placeholder="Password" />
+          <Button
+            design="v1"
+            type="submit"
+            disabled={isLoading}
+            isLoading={isLoading}
+            className="mt-4 h-40 bg-orange-400 text-white hover:text-black"
+          >
+            Đăng nhập
+          </Button>
+          {errMsg && <div className="mt-4 text-red-700 text-14">{errMsg}</div>}
+        </Form>
+      </FormikProvider>
+    </div>
   )
 }
 

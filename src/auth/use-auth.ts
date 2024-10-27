@@ -1,5 +1,6 @@
-import { API_LOGOUT_PATH, API_USER_ME_PATH } from '@/config/constants'
+import { API_LOGIN_PATH, API_LOGOUT_PATH, API_USER_ME_PATH } from '@/config/constants'
 import axiosInstance from '@/lib/axios'
+import { AuthResponse, LoginType } from '@/types/auth'
 import { User } from '@/types/user'
 import { error } from '@/utils/safety-log'
 import { useEffect, useState } from 'react'
@@ -38,10 +39,43 @@ export const useAuth = (props: UseAuthProps) => {
     }
   }
 
+  const loginWithEmail = async (email: string, password: string) => {
+    try {
+      const { data } = await axiosInstance.post(API_LOGIN_PATH, {
+        email,
+        password,
+        type: LoginType.email,
+      })
+
+      if (data.user) {
+        setUser(data.user)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const loginWithGoogle = async (googleToken: string) => {
+    try {
+      const { data }: any = await axiosInstance.post(API_LOGIN_PATH, {
+        type: LoginType.google,
+        token: googleToken,
+      })
+
+      if (data.user) {
+        setUser(data.user)
+      }
+    } catch (error) {
+      throw error
+    }
+  }
+
   return {
     user,
     isLoading,
     logout,
     setUser,
+    loginWithGoogle,
+    loginWithEmail,
   }
 }

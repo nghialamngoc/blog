@@ -3,11 +3,13 @@ import ThemeProvider from '@/components/ThemeProvider'
 import { RouterListener } from '@/components/RouterListener'
 import { Noto_Sans } from 'next/font/google'
 import { registerLanguage } from 'react-refractor'
+import { GoogleOAuthProvider } from '@react-oauth/google'
 import clsx from 'clsx'
 
 import js from 'refractor/lang/javascript.js'
 import jsx from 'refractor/lang/jsx'
 import typescript from 'refractor/lang/typescript'
+
 import Header from '@/components/Header'
 
 import '@/styles/globals.css'
@@ -33,14 +35,16 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={clsx(font.className, 'font-light')}>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <RouterListener />
+        <GoogleOAuthProvider clientId={process.env.GOOGLE_CLIENT_ID!}>
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <RouterListener />
 
-          <Header />
-          {children}
+            <Header />
+            {children}
 
-          <div className="hidden xl:block h-[100vh]"></div>
-        </ThemeProvider>
+            <div className="hidden xl:block h-[100vh]"></div>
+          </ThemeProvider>
+        </GoogleOAuthProvider>
       </body>
     </html>
   )

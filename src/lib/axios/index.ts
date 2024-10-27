@@ -48,7 +48,7 @@ axiosInstance.interceptors.response.use(
   },
   async (error: any) => {
     const originalRequest = error.config as InternalAxiosRequestConfig & { _retry?: boolean }
-    if (error.response?.status === 401 && !originalRequest._retry) {
+    if (error.config.url !== API_LOGIN_PATH && error.response?.status === 401 && !originalRequest._retry) {
       if (isRefreshing) {
         return new Promise<AxiosResponse>((resolve) => {
           addRefreshSubscriber(() => {

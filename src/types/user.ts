@@ -3,4 +3,5 @@ export interface User {
   email: string
   userName: string
   role?: 'admin' | 'user'
+  avatar?: string
 }
