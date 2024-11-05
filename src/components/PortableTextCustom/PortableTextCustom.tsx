@@ -8,6 +8,8 @@ import { Refractor } from 'react-refractor'
 import Copy from '../Copy'
 import { LanguageIcon } from '../LanguageIcon/LanguageIcon'
 import styles from './PortableTextCustom.module.css'
+import { SANDBOX_PREFIX } from '@/config/constants'
+import { CodeSandBox } from '../IFrame/CodeSandBox/CodeSandBox'
 
 export interface PortableTextCustomProps {
   className?: string
@@ -22,6 +24,9 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
         listNestingMode="html"
         components={{
           block: {
+            code: () => {
+              return '123'
+            },
             blockquote: ({ children }) => {
               return <blockquote className="border-l-4 border-gray pl-8 my-24">{children}</blockquote>
             },
@@ -112,6 +117,16 @@ export const PortableTextCustom: FC<PortableTextCustomProps> = ({ className, con
             },
           },
           marks: {
+            code: ({ value, children }) => {
+              if (Array.isArray(children) && children[0] && children[0].startsWith(SANDBOX_PREFIX)) {
+                const url = children[0].split(SANDBOX_PREFIX)?.filter((x: string) => x)?.[0]
+                if (url) {
+                  return <CodeSandBox url={url} />
+                }
+              }
+
+              return children
+            },
             internalLink: ({ value, children }) => {
               const slug: string = value?.slug?.current
               const fullUrl = (slug.startsWith('/') ? '' : '/') + slug

@@ -1,5 +1,8 @@
 import { SERVER_BASE_URL } from './env'
 
+// SANITY
+export const SANDBOX_PREFIX = 'codesandbox iframe:'
+
 export const POST_PATH = '/post/'
 export const DEFAULT_ITEM_PER_PAGE = 9
 
